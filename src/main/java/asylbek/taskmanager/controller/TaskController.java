@@ -15,13 +15,11 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    // GET /api/tasks - получить все задачи
     @GetMapping
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
 
-    // GET /api/tasks/1 - получить задачу по ID
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id)
@@ -29,20 +27,16 @@ public class TaskController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // GET /api/tasks/user/1 - получить задачи пользователя
     @GetMapping("/user/{userId}")
     public List<Task> getTasksByUser(@PathVariable Long userId) {
         return taskService.getTasksByUser(userId);
     }
 
-    // POST /api/tasks - создать задачу
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         Task saved = taskService.createTask(task);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
-
-    // PUT /api/tasks/1 - обновить задачу
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
         try {
@@ -53,7 +47,6 @@ public class TaskController {
         }
     }
 
-    // DELETE /api/tasks/1 - удалить задачу
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);

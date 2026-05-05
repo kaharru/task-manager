@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    // Дополнительный метод: найти задачи по userId
     List<Task> findByUserId(Long userId);
 }
